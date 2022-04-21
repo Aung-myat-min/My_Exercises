@@ -1,34 +1,49 @@
-MOVIES = [('Titanic', 150, 'Michal'),
-          ('Big Bang', 120, 'David'),
-          ('Neuron', 110, 'Khaled'),
-          ('The', 90, 'Jame'),
-          ('Kol', 160, 'AMM')]
+from collections import namedtuple
 
+guide = namedtuple('Moive', 'Name Length Director')
+MOVIES = [guide('Titanic', 150, 'Michal'),
+         guide('Big Bang', 120, 'David'),
+         guide('Neuron', 110, 'Khaled'),
+         guide('The' , 120, 'Trump'),
+         guide('Kol', 160, 'AMM')]
+print(MOVIES)
+print([sorted(MOVIES[i].Name for i in range(5))])
 def sort_by_user():
     print('''Options::  Length
            Name
            Director''')
     opt = input('::')
-    mar = {'Name': 0, 'Length': 1, 'Director': 2}
     sample = {}
     for i in MOVIES:
-        sample[i[mar.get(opt)]] = i
+        g = None
+        if opt == 'Name':
+            g = i.Name
+        elif opt == 'Length':
+            g = i.Length
+        else:
+            g = i.Director
+        sample[g] = i
     re = sorted(sample)
     for i in re:
         print(sample.get(i))
-
 
 def sort_by_user2():
     print('''Options::  Length
            Name
            Director''')
     opt = input('::').split()
-    mar = {'Name': 0, 'Length': 1, 'Director': 2}
     sample = {}
     for i in opt:
         sa = {}
         for j in MOVIES:
-            sa[j[mar.get(i)]] = j
+            g = None
+            if i == 'Name':
+                g = j.Name
+            elif i == 'Length':
+                g = j.Length
+            else:
+                g = j.Director
+            sa[g] = j
         re = sorted(sa)
         print(f'By {i}')
         for k in re:
